@@ -16,13 +16,14 @@ public class RedisRepository {
 
 	private static final String EVENT_HASH_KEY = "event";
 
+	// all values within hash operations need to be saved as strings
 	public void saveRecord(Event event) {
 		String key = EVENT_HASH_KEY + ":" + event.getEventId();
-		template.opsForHash().put(key, "eventId", event.getEventId());
+		template.opsForHash().put(key, "eventId", event.getEventId().toString());
 		template.opsForHash().put(key, "eventName", event.getEventName());
-		template.opsForHash().put(key, "eventSize", event.getEventSize());
-		template.opsForHash().put(key, "eventDate", event.getEventDate());
-		template.opsForHash().put(key, "participants", event.getParticipants());
+		template.opsForHash().put(key, "eventSize", event.getEventSize().toString());
+		template.opsForHash().put(key, "eventDate", Long.toString(event.getEventDate()));
+		template.opsForHash().put(key, "participants", event.getParticipants().toString());
 
 	}
 
