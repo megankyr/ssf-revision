@@ -1,5 +1,6 @@
 package vttp.ssf.assessment.eventmanagement.repositories;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,20 @@ public class RedisRepository {
 	public int getNumberOfEvents() {
 		Set<String> hashKeys = template.keys(EVENT_HASH_KEY + ":*");
 		return hashKeys.size();
+	}
+
+	public Event getEvent(Integer index) {
+		String eventKey = EVENT_HASH_KEY + ":" + index;
+		Map<Object, Object> eventData = template.opsForHash().entries(eventKey);
+		Event event = new Event();
+		event.setEventId(Integer.parseInt(eventData.get("eventId").toString()));
+		event.setEventName(eventData.get("eventName").toString());
+		event.setEventSize(Integer.parseInt(eventData.get("eventSize").toString()));
+		event.setEventDate(Long.parseLong(eventData.get("eventDate").toString()));
+		event.setParticipants(Integer.parseInt(eventData.get("participants").toString()));
+
+		return event;
+
 	}
 
 }
