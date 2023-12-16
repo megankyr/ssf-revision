@@ -1,5 +1,7 @@
 package vttp.ssf.assessment.eventmanagement.repositories;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,4 +29,10 @@ public class RedisRepository {
 
 	}
 
+	// the "*" acts as a wildcard, so anything after "event:"
+	public int getNumberOfEvents() {
+		Set<String> hashKeys = template.keys(EVENT_HASH_KEY + ":*");
+		return hashKeys.size();
 	}
+
+}
