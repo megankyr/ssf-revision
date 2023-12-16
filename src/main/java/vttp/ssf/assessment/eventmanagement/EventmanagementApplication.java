@@ -32,8 +32,6 @@ public class EventmanagementApplication implements CommandLineRunner {
 			System.out.println(event.toString());
 			repo.saveRecord(event);
 		}
-		System.out.println("Event size: " + repo.getNumberOfEvents());
-		System.out.println("Get event: " + repo.getEvent(1));
 
 	}
 }
