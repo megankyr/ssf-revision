@@ -1,4 +1,4 @@
-package vttp.ssf.assessment.config;
+package vttp.ssf.assessment.eventmanagement.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

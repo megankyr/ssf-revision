@@ -27,8 +27,3 @@ public class RedisRepository {
 	}
 
 	}
-
-	// TODO: Task 3
-	
-
-// TODO: Task 4
