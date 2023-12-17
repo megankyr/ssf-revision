@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register for event</title>
+  </head>
+  <body>
+    <form
+      method="POST"
+      action="/registration/register"
+      data-th-object="${user}"
+    >
+      <h1>Register event</h1>
+      <h4>You have chosen to register for the following event:</h4>
+      <h3 th:text="${event.eventName}"></h3>
+      <h3 th:text="${#dates.format(event.eventDate, 'dd-MM-yyyy')}"></h3>
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        data-th-field="*{fullName}"
+        id="fullName"
+        name="fullName"
+      />
+      <p th:errors="*{fullName}"></p>
+      <br />
+      <label for="dob">DOB</label>
+      <input type="date" data-th-field="*{dob}" id="dob" name="dob" />
+      <p th:errors="*{dob}"></p>
+      <br />
+      <label for="email">Email</label>
+      <input type="email" data-th-field="*{email}" id="email" name="email" />
+      <p th:errors="*{email}"></p>
+      <br />
+      <label for="phoneno">Mobile No</label>
+      <input
+        type="tel"
+        data-th-field="*{phoneno}"
+        id="phoneno"
+        name="phoneno"
+      />
+      <p th:errors="*{phoneno}"></p>
+      <br />
+      <label for="gender">Gender</label>
+      <input type="text" data-th-field="*{gender}" id="gender" name="gender" />
+      <p th:errors="*{gender}"></p>
+      <br />
+      <label for="ticketno">Number of Tickets</label>
+      <input
+        type="number"
+        data-th-field="*{ticketno}"
+        id="ticketno"
+        name="ticketno"
+      />
+      <p th:errors="*{ticketno}"></p>
+      <button type="submit">Register</button>
+    </form>
+  </body>
+</html>

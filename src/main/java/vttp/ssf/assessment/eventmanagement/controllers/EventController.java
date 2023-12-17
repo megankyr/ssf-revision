@@ -18,6 +18,7 @@ public class EventController {
 	@Autowired
 	EventService eventService;
 
+	// handles the GET request to display events page
 	@GetMapping("/listing")
 	public ModelAndView displayEvents() {
 		List<Event> events = eventService.getAllEvents();
