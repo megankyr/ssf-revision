@@ -47,6 +47,10 @@ public class RedisRepository {
 		event.setParticipants(Integer.parseInt(eventData.get("participants").toString()));
 
 		return event;
+	}
 
+	public void updateParticipants(Integer eventId, int newParticipants) {
+		String eventKey = EVENT_HASH_KEY + ":" + eventId;
+		template.opsForHash().put(eventKey, "participants", String.valueOf(newParticipants));
 	}
 }

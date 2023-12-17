@@ -1,6 +1,7 @@
 package vttp.ssf.assessment.eventmanagement.models;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,7 +29,7 @@ public class User {
     @Size(max = 50, message = "Email must be up to a maximum of 50 characters")
     private String email;
 
-    @Pattern(regexp = "[8|9][0-9]{8}", message = "Phone Number must start with 8 or 9 and contain 8 digits")
+    @Pattern(regexp = "[89][0-9]{7}", message = "Phone Number must start with 8 or 9 and contain 8 digits")
     private String phoneno;
 
     private String gender;
@@ -44,7 +45,7 @@ public class User {
             @NotBlank(message = "Name must be provided") @Size(min = 5, max = 25, message = "Name must be between 5 and 25 characters") String fullName,
             @Past(message = "Date of Birth must be in the past") LocalDate dob,
             @NotNull(message = "Email must be provided") @Email(message = "Must be a valid email") @Size(max = 50, message = "Email must be up to a maximum of 50 characters") String email,
-            @Pattern(regexp = "[8|9][0-9]{8}", message = "Phone Number must start with 8 or 9 and contain 8 digits") String phoneno,
+            @Pattern(regexp = "[89][0-9]{7}", message = "Phone Number must start with 8 or 9 and contain 8 digits") String phoneno,
             String gender,
             @Min(value = 1, message = "Minimum request is 1") @Max(value = 10, message = "Maximum request is 10") int ticketno) {
         this.fullName = fullName;
@@ -69,6 +70,16 @@ public class User {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public boolean isValidAge() {
+        if (dob == null) {
+            return false;
+        }
+
+        LocalDate now = LocalDate.now();
+        int age = Period.between(dob, now).getYears();
+        return age >=21 ;
     }
 
     public String getEmail() {
@@ -102,4 +113,5 @@ public class User {
     public void setTicketno(int ticketno) {
         this.ticketno = ticketno;
     }
+
 }
